@@ -1,6 +1,7 @@
 calculate_speed() {
     local total_rx_speed=0
     local total_tx_speed=0
+
     interfaces=$(ls /sys/class/net | grep -v lo)
 
     for interface in $interfaces; do
@@ -15,11 +16,21 @@ calculate_speed() {
         total_rx_speed=$((total_rx_speed + rx_speed))
         total_tx_speed=$((total_tx_speed + tx_speed))
     done
+
     total_rx_speed_mbps=$(echo "scale=2; $total_rx_speed * 8 / 1024 / 1024" | bc)
     total_tx_speed_mbps=$(echo "scale=2; $total_tx_speed * 8 / 1024 / 1024" | bc)
 
-    echo "IN: $total_rx_speed_mbps Mbps | OUT: $total_tx_speed_mbps Mbps"
+    if (( $(echo "$total_rx_speed_mbps < 1" | bc -l) )); then
+        total_rx_speed_mbps="0$total_rx_speed_mbps"
+    fi
+
+    if (( $(echo "$total_tx_speed_mbps < 1" | bc -l) )); then
+        total_tx_speed_mbps="0$total_tx_speed_mbps"
+    fi
+
+    echo "Total IN: $total_rx_speed_mbps Mbps | Total OUT: $total_tx_speed_mbps Mbps"
 }
+
 while true; do
     calculate_speed
 done
