@@ -1,36 +1,14 @@
-calculate_speed() {
-    local total_rx_speed=0
-    local total_tx_speed=0
-
-    interfaces=$(ls /sys/class/net | grep -v lo)
-
-    for interface in $interfaces; do
-        rx_prev=$(cat /sys/class/net/$interface/statistics/rx_bytes)
-        tx_prev=$(cat /sys/class/net/$interface/statistics/tx_bytes)
-        sleep 1
-        rx_now=$(cat /sys/class/net/$interface/statistics/rx_bytes)
-        tx_now=$(cat /sys/class/net/$interface/statistics/tx_bytes)
-        rx_speed=$((rx_now - rx_prev))
-        tx_speed=$((tx_now - tx_prev))
-
-        total_rx_speed=$((total_rx_speed + rx_speed))
-        total_tx_speed=$((total_tx_speed + tx_speed))
-    done
-
-    total_rx_speed_mbps=$(echo "scale=2; $total_rx_speed * 8 / 1024 / 1024" | bc)
-    total_tx_speed_mbps=$(echo "scale=2; $total_tx_speed * 8 / 1024 / 1024" | bc)
-
-    if (( $(echo "$total_rx_speed_mbps < 1" | bc -l) )); then
-        total_rx_speed_mbps="0$total_rx_speed_mbps"
-    fi
-
-    if (( $(echo "$total_tx_speed_mbps < 1" | bc -l) )); then
-        total_tx_speed_mbps="0$total_tx_speed_mbps"
-    fi
-
-    echo "Total IN: $total_rx_speed_mbps Mbps | Total OUT: $total_tx_speed_mbps Mbps"
+#!/bin/bash
+bytes_to_mbps() {
+    awk -v bytes="$1" 'BEGIN { printf "%.2f\n", bytes * 8 / 1000000 }'
 }
-
 while true; do
-    calculate_speed
+    RX1=$(cat /sys/class/net/eth0/statistics/rx_bytes)
+    TX1=$(cat /sys/class/net/eth0/statistics/tx_bytes)
+    sleep 1
+    RX2=$(cat /sys/class/net/eth0/statistics/rx_bytes)
+    TX2=$(cat /sys/class/net/eth0/statistics/tx_bytes)
+    RX_SPEED=$(bytes_to_mbps $(($RX2 - $RX1)))
+    TX_SPEED=$(bytes_to_mbps $(($TX2 - $TX1)))
+    echo "IN: $RX_SPEED Mbps | OUT: $TX_SPEED Mbps"
 done
