@@ -61,77 +61,7 @@ sudo tc qdisc del dev eth0 root
 green "Xóa giới hạn tốc độ băng thông thành công!"
 }
 # chặn speedtest
-function blockspeed(){
-bash <(curl -Ls https://raw.githubusercontent.com/zeronxdev/tool/main/blockspt.sh)
-}
-
-function hacap(){
-wget -O "/root/LinuxPanel_EN-6.8.23.zip" "https://github.com/AZZ-vopp/code-/raw/main/LinuxPanel_EN-6.8.23.zip"
-blue "Đang tải tệp zip."
-unzip LinuxPanel_EN-6.8.23.zip
-cd /root/panel
-wget -O "/root/panel/confhacap.sh" "https://raw.githubusercontent.com/AZZ-vopp/code-/main/confhacap.sh" 
-bash "/root/panel/confhacap.sh"
-red "Hạ cấp hoàn tất"
-rm /root/LinuxPanel_EN-6.8.23.zip /root/panel/ -rf
-}
-function speedtest(){
-curl -Lso- bench.sh | bash
-}
-
-
-
-# menu
-function start_menu(){
-    clear
-    purple " Chào mừng bạn đến với tool HT4GVPN."
-    yellow " ————————————————————————————————————————————————"
-    green " 1. Giới hạn tốc độ băng thông (100Mbps)"
-    green " 2. Xóa giới hạn tốc độ băng thông"
-    green " 3. Speedtest"
-    green " 4. Chặn Speedtest"
-    green " 5. Mở khoá chặn Speedtest"
-    yellow " ————————————————————————————————————————————————"
-    green " 6. Cài đặt aaPanel bản gốc (cho CentOS)"
-    green " 7. Crack bản aaPanel hiện tại (Ưu tiên cài mới) "
-    green " 8. Hạ cấp xuống bản ổn định 6.8.23 (Một số chỗ tiếng Trung)"   
-    green " 9. Cài đặt aaPanel bản Trung (Cho CentOS)"
-    yellow " ————————————————————————————————————————————————"
-    green " 10. Gỡ cài đặt bản aaPanel hiện tại"
-    green " 0. Thoát giao diện tool"
-
-    echo
-    read -p "Vui lòng chọn chức năng:" menuNumberInput
-    case "$menuNumberInput" in
-        1 )
-           limit
-	    ;;
-        2 )
-           unlimit
-        ;;
-        3 )
-           speedtest
-        ;;
-        4 )
-           blockspeed
-        ;;
-        5 )
-           unspeedtest
-        ;;
-        6 )
-           aapanelgoc
-        ;;
-        7 )
-           panelcrack
-        ;;
-        8 )
-           hacap
-        ;;
-        9 )
-           aapanelTQ
-        ;;
-	    10 )
-           uninstall
+function blockspeshowspeed   
         ;;
         0 )
             exit 1
