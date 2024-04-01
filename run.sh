@@ -133,10 +133,10 @@ function start_menu(){
         9 )
            aapanelTQ
         ;;
-	    10 )
+	10 )
            uninstall
         ;;
-	    11 )
+	11 )
            showspeed   
         ;;
         0 )
