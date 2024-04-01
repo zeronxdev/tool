@@ -1,4 +1,3 @@
-#!/bin/bash
 calculate_speed() {
     local total_rx_speed=0
     local total_tx_speed=0
