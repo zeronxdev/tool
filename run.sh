@@ -23,13 +23,13 @@ red "Đã cài đặt thành công aaPanel"
 # cài đặt bản aapanel bản tàu khựa
 function aapanelTQ(){  
 yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
-red "Đã cài đặt aaPanel bản Trung thành công"
+red "Đã cài đặt aaPanel bản Trung Quốc thành công"
 }
 
 # bẻ khoá aapanel bản hiện tại
 function panelcrack(){  
 bash <(curl -Ls https://raw.githubusercontent.com/overkillzero/tool/main/crack.sh)
-red "Đã crack aaPanel xong, vui lòng login lại aaPanel"
+green "Đã crack aaPanel xong, vui lòng login lại aaPanel"
 }
 # mở chặn speedtest
 function unspeedtest(){
