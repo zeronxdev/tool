@@ -22,8 +22,8 @@ red "Đã cài đặt thành công aaPanel"
 
 # cài đặt bản aapanel bản tàu khựa
 function aapanelTQ(){  
-yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
-red "Đã cài đặt aaPanel bản Trung Quốc thành công"
+if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
+green "Đã cài đặt aaPanel bản Trung Quốc thành công"
 }
 
 # bẻ khoá aapanel bản hiện tại
@@ -89,7 +89,7 @@ function start_menu(){
     yellow " ————————————————————————————————————————————————"
     green " 6. Cài đặt aaPanel bản gốc (cho CentOS)"
     green " 7. Crack bản aaPanel hiện tại (Ưu tiên cài mới) "
-    green " 8. Hạ cấp xuống bản ổn định 6.8.23 (Một số chỗ tiếng Trung)"   
+    green " 8. Hạ cấp aaPanel xuống bản ổn định (6.8.37)"   
     green " 9. Cài đặt aaPanel bản Trung (Cho CentOS)"
     yellow " ————————————————————————————————————————————————"
     green " 10. Gỡ cài đặt bản aaPanel hiện tại"
