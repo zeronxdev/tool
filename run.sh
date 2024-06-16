@@ -68,14 +68,7 @@ function showspeed(){
 bash <(curl -Ls https://raw.githubusercontent.com/overkillzero/tool/main/net.sh)
 }
 function hacap(){
-wget -O "/root/LinuxPanel_EN-6.8.23.zip" "https://github.com/AZZ-vopp/code-/raw/main/LinuxPanel_EN-6.8.23.zip"
-blue "Đang tải tệp zip."
-unzip LinuxPanel_EN-6.8.23.zip
-cd /root/panel
-wget -O "/root/panel/confhacap.sh" "https://raw.githubusercontent.com/AZZ-vopp/code-/main/confhacap.sh" 
-bash "/root/panel/confhacap.sh"
-red "Hạ cấp hoàn tất"
-rm /root/LinuxPanel_EN-6.8.23.zip /root/panel/ -rf
+bash <(curl -Ls https://raw.githubusercontent.com/zeronxdev/tool/main/old.sh)
 }
 function speedtest(){
 curl -Lso- bench.sh | bash
